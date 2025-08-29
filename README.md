@@ -42,7 +42,7 @@ Siga os passos abaixo para configurar e rodar a aplicação.
     ```
 3.  **Instale as dependências:**
     ```bash
-    pip install -r requirements.txt # Se você tiver o arquivo
+    pip install -r requirements.txt
     # Ou instale manualmente
     pip install django djangorestframework django-cors-headers
     ```
