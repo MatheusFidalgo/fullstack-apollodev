@@ -1,5 +1,7 @@
 # [Desafio Fullstack Apollo Dev]
 
+[![Vídeo de navegação](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)](https://youtu.be/XhL4nG5Lg1w)
+
 ## Descrição do Projeto
 Este é um aplicativo web full-stack desenvolvido com **Python Django** no backend e **React** no frontend. O sistema permite o gerenciamento de produtos, com funcionalidades completas de CRUD (Criar, Ler, Atualizar, Deletar).
 
