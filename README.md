@@ -48,9 +48,13 @@ Siga os passos abaixo para configurar e rodar a aplicação.
     python manage.py makemigrations
     python manage.py migrate
     ```
-5.  **Crie um usuário administrador:**
+5.  **Crie um usuário administrador ou use o admin padrao:**
     ```bash
     python manage.py createsuperuser
+    ```
+    ```usuario admin
+    admin
+    1234
     ```
 6.  **Inicie o servidor do Django:**
     ```bash
