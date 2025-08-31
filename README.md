@@ -1,5 +1,8 @@
 # [Desafio Fullstack Apollo Dev]
 
+
+[![Assista ao vídeo de demonstração](https://i.imgur.com/MWd1SFP.png)](https://youtu.be/XhL4nG5Lg1w)
+
 ## Descrição do Projeto
 Este é um aplicativo web full-stack desenvolvido com **Python Django** no backend e **React** no frontend. O sistema permite o gerenciamento de produtos, com funcionalidades completas de CRUD (Criar, Ler, Atualizar, Deletar).
 
@@ -39,7 +42,7 @@ Siga os passos abaixo para configurar e rodar a aplicação.
     ```
 3.  **Instale as dependências:**
     ```bash
-    pip install -r requirements.txt # Se você tiver o arquivo
+    pip install -r requirements.txt
     # Ou instale manualmente
     pip install django djangorestframework django-cors-headers
     ```
@@ -48,9 +51,13 @@ Siga os passos abaixo para configurar e rodar a aplicação.
     python manage.py makemigrations
     python manage.py migrate
     ```
-5.  **Crie um usuário administrador:**
+5.  **Crie um usuário administrador ou use o admin padrao:**
     ```bash
     python manage.py createsuperuser
+    ```
+    ```usuario admin
+    admin
+    1234
     ```
 6.  **Inicie o servidor do Django:**
     ```bash
