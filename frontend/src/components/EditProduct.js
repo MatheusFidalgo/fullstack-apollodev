@@ -28,7 +28,7 @@ const EditProduct = () => {
     try {
       await axios.put(`http://127.0.0.1:8000/api/v1/products/${id}/`, values);
       message.success('Produto atualizado com sucesso!');
-      navigate('/table');
+      navigate('/'); 
     } catch (error) {
       message.error('Falha ao atualizar o produto.');
       console.error("Error updating product:", error);
@@ -55,6 +55,9 @@ const EditProduct = () => {
           <InputNumber />
         </Form.Item>
         <Form.Item name="price" label="Preço" rules={[{ required: true, message: 'Por favor, digite o preço!' }]}>
+          <InputNumber />
+        </Form.Item>
+        <Form.Item name="quantity" label="Quantidade" rules={[{ required: true, message: 'Por favor, digite a quantidade!' }]}>
           <InputNumber />
         </Form.Item>
         <Form.Item>

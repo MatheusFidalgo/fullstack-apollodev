@@ -8,6 +8,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class HistorySerializer(serializers.ModelSerializer):
     product_name = serializers.StringRelatedField(source='product', read_only=True)
+    category_id = serializers.IntegerField(source='product.category_id', read_only=True)
     product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
     
     class Meta:

@@ -4,6 +4,8 @@ from .models import Product, History
 from .serializers import ProductSerializer, HistorySerializer
 from rest_framework import status
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
+from datetime import date
 
 @api_view(['GET', 'POST'])
 def product_list(request):
@@ -28,19 +30,42 @@ def product_list(request):
 
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def product_detail(request, pk):
-    try:
-        product = Product.objects.get(pk=pk)
-    except Product.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
+    product = get_object_or_404(Product, pk=pk)
+    
     if request.method == 'GET':
         serializer = ProductSerializer(product)
         return Response(serializer.data)
     
     elif request.method == 'PUT' or request.method == 'PATCH':
-        serializer = ProductSerializer(product, data=request.data)
+        old_quantity = product.quantity
+        old_price = product.price
+        
+        serializer = ProductSerializer(product, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
+            
+            new_quantity = serializer.validated_data.get('quantity')
+            new_price = serializer.validated_data.get('price')
+            
+            if (new_quantity is not None and new_quantity != old_quantity) or \
+               (new_price is not None and new_price != old_price):
+                
+                try:
+                    history_record = History.objects.get(product=product.id)
+                    history_record.month = date.today().strftime("%B")
+                    history_record.quantity = new_quantity if new_quantity is not None else old_quantity
+                    history_record.save()
+
+                except History.DoesNotExist:
+                    history_data = {
+                        'product': product.id,
+                        'month': date.today().strftime("%B"),
+                        'quantity': new_quantity if new_quantity is not None else old_quantity,
+                    }
+                    history_serializer = HistorySerializer(data=history_data)
+                    if history_serializer.is_valid():
+                        history_serializer.save()
+            
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -54,13 +79,13 @@ def history_list(request):
         query = request.GET.get('search', '')
         if query:
             histories = History.objects.filter(
-                Q(product_id__icontains=query) | 
                 Q(month__icontains=query) |
+                Q(product__id__icontains=query) |
                 Q(quantity__icontains=query)
             )
         else:
             histories = History.objects.all()
-
+            
         serializer = HistorySerializer(histories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     

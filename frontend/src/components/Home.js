@@ -27,6 +27,8 @@ const Home = () => {
         <p><a href="http://127.0.0.1:8000/admin">Banco de Dados Django</a></p>
         <p><b>Usuario:</b> admin</p>
         <p><b>Senha:</b> 1234</p>
+        <h2>Observação</h2>
+        <p><u>Tentei a implementação do tailwindcss após e não obtive êxito de forma alguma.</u> :/ </p>
       </div>
     </div>
   );

@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Space, Table, Input, Form, Button, message, InputNumber, Popconfirm } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const { Search } = Input;
 
 const TableInfo = () => {
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
-
-  const handleUpdate = (record) => {
-    navigate(`/edit/${record.id}`);
-  };
 
   const handleDelete = async (record) => {
     try {
@@ -33,33 +28,34 @@ const TableInfo = () => {
       key: 'id',
     },
     {
-      title: 'Nome',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: 'ID Categoria',
+      title: 'Category ID',
       dataIndex: 'category_id',
       key: 'category_id',
     },
     {
-      title: 'Preço',
+      title: 'Price',
       dataIndex: 'price',
       key: 'price',
     },
     {
-      title: 'Ação',
+      title: 'Action',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={() => handleUpdate(record)}>Alterar</a>
+          {}
+          <Link to={`/edit/${record.id}`}>Alterar</Link>
           <Popconfirm
             title="Tem certeza que deseja deletar?"
             onConfirm={() => handleDelete(record)}
             okText="Sim"
             cancelText="Não"
           >
-            <a>Deletar</a>
+            <Button type="link" danger>Deletar</Button>
           </Popconfirm>
         </Space>
       ),
@@ -103,7 +99,7 @@ const TableInfo = () => {
       form.resetFields();
     } catch (error) {
       message.error('Falha ao adicionar o produto ou registrar histórico.');
-      console.error("Error ao adicionar o produto ou histórico:", error);
+      console.error("Error adding product or history:", error);
     }
   };
 
@@ -113,14 +109,14 @@ const TableInfo = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1px' }}>
-        <h2>Registro de venda</h2>
+    <h1>Registro de Venda</h1>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
         <Form
           form={form}
           name="basic"
           layout="inline"
           onFinish={onFinish}
-          style={{ marginBottom: '1px' }}
+          style={{ marginBottom: '16px' }}
         >
           <Form.Item
             name="name"
@@ -140,22 +136,26 @@ const TableInfo = () => {
           >
             <InputNumber placeholder="Preço" />
           </Form.Item>
+          <Form.Item
+            name="quantity"
+            rules={[{ required: true, message: 'Por favor, digite a quantidade!' }]}
+          >
+            <InputNumber placeholder="Quantidade" />
+          </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Adicionar
             </Button>
           </Form.Item>
         </Form>
-        <h2>Filtro de vendas</h2>
         <Search
           placeholder="Buscar por ID ou Nome"
           allowClear
           onSearch={handleSearch}
           onChange={(e) => handleSearch(e.target.value)}
-          style={{ width: 300, marginBottom: 1 }}
+          style={{ width: 300, marginBottom: 16 }}
         />
       </div>
-      <h2>Vendas</h2>
       <Table 
         columns={columns} 
         dataSource={data} 
