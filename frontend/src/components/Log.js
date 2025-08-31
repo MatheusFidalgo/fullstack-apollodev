@@ -10,8 +10,13 @@ const columns = [
     },
     {
       title: 'Product',
-      dataIndex: 'product',
-      key: 'product',
+      dataIndex: 'product_name',
+      key: 'product_name',
+    },
+    {
+      title: 'Category ID',
+      dataIndex: 'category_id',
+      key: 'category_id',
     },
     {
       title: 'Month',
@@ -37,7 +42,7 @@ const Log = () => {
     const fetchHistory = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/history/');
+            const response = await axios.get(`http://127.0.0.1:8000/api/v1/history/`);
             setData(response.data);
         } catch (error) {
             message.error('Falha ao carregar o histórico.');
@@ -51,10 +56,9 @@ const Log = () => {
         fetchHistory();
     }, []);
 
-
     return (
         <div style={{ padding: '20px' }}>
-            <h1>Histórico</h1>
+            <h1>Histórico de Vendas</h1>
             <Table
                 columns={columns}
                 dataSource={data}

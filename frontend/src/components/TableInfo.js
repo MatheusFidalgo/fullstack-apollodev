@@ -33,22 +33,22 @@ const TableInfo = () => {
       key: 'id',
     },
     {
-      title: 'Name',
+      title: 'Nome',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: 'Category ID',
+      title: 'ID Categoria',
       dataIndex: 'category_id',
       key: 'category_id',
     },
     {
-      title: 'Price',
+      title: 'Preço',
       dataIndex: 'price',
       key: 'price',
     },
     {
-      title: 'Action',
+      title: 'Ação',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
@@ -103,7 +103,7 @@ const TableInfo = () => {
       form.resetFields();
     } catch (error) {
       message.error('Falha ao adicionar o produto ou registrar histórico.');
-      console.error("Error adding product or history:", error);
+      console.error("Error ao adicionar o produto ou histórico:", error);
     }
   };
 
@@ -113,13 +113,14 @@ const TableInfo = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1px' }}>
+        <h2>Registro de venda</h2>
         <Form
           form={form}
           name="basic"
           layout="inline"
           onFinish={onFinish}
-          style={{ marginBottom: '16px' }}
+          style={{ marginBottom: '1px' }}
         >
           <Form.Item
             name="name"
@@ -145,14 +146,16 @@ const TableInfo = () => {
             </Button>
           </Form.Item>
         </Form>
+        <h2>Filtro de vendas</h2>
         <Search
           placeholder="Buscar por ID ou Nome"
           allowClear
           onSearch={handleSearch}
           onChange={(e) => handleSearch(e.target.value)}
-          style={{ width: 300, marginBottom: 16 }}
+          style={{ width: 300, marginBottom: 1 }}
         />
       </div>
+      <h2>Vendas</h2>
       <Table 
         columns={columns} 
         dataSource={data} 

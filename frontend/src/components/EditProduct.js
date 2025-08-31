@@ -24,7 +24,6 @@ const EditProduct = () => {
     fetchProduct();
   }, [id, form]);
 
-  // Função para lidar com o envio do formulário de atualização
   const onFinish = async (values) => {
     try {
       await axios.put(`http://127.0.0.1:8000/api/v1/products/${id}/`, values);
