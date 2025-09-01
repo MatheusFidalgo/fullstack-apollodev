@@ -21,21 +21,22 @@ const items = [
   },
 ];
 
-
 const NavBar = () => {
+  const [current, setCurrent] = useState('/'); 
   const navigate = useNavigate();
-  const [current, setCurrent] = useState('/');
-    const onClick = (e) => {
-        setCurrent(e.key);
-        navigate(e.key);
-    };
-   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', backgroundColor: '#fff', boxShadow: '0 2px 8px #f0f1f2' }}>
-      <div style={{ padding: '10px' }}>
-        <img src="/smartmart.png" alt="Logo" style={{ height: '40px' }} />
+  const onClick = (e) => {
+    setCurrent(e.key);
+    navigate(e.key);
+  };
+  
+  return (
+    <div className="flex items-center justify-between px-5 bg-white shadow-md">
+      <div className="py-2">
+        <img src="/smartmart.png" alt="Logo" className="h-10" />
       </div>
-      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} style={{ flex: 1, justifyContent: 'flex-start', borderBottom: 'none' }} />
+      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} className="flex-1 justify-start border-b-0" />
     </div>
   );
 };
+
 export default NavBar;

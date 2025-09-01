@@ -108,9 +108,9 @@ const TableInfo = () => {
   };
 
   return (
-    <>
-    <h1>Registro de Venda</h1>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
+      <div className="p-5 max-w-7xl mx-auto">
+      <div className="flex flex-col items-center p-5">
+              <h1 className="text-3xl font-bold mb-4 text-center">Registro de venda</h1>
         <Form
           form={form}
           name="basic"
@@ -162,7 +162,7 @@ const TableInfo = () => {
         loading={loading} 
         rowKey="id" 
       />
-    </>
+    </div>
   );
 };
 

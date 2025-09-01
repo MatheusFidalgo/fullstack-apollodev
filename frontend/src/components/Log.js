@@ -67,8 +67,8 @@ const Log = () => {
     };
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h1>Histórico</h1>
+        <div className="p-5 max-w-7xl mx-auto">
+            <h1 className="text-3xl font-bold mb-4 text-center">Histórico</h1>
             {/* <Search
                 placeholder="Buscar"
                 allowClear
